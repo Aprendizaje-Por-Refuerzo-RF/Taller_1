@@ -1,0 +1,21 @@
+# Configuración de Value Iteration sobre Milan Taxi.
+# Ecuación de referencia: Sutton & Barto, Cap. 4 (ec. 4.10, Fig. 4.5).
+
+algorithm: value_iteration
+
+# `make_env(**config["env"])` reenvía esto tal cual a `MilanTaxiEnv(...)` (ver su
+# docstring en src/rl_project/envs/milan_taxi.py). Vacío = usar todos los defaults del
+# Milan Taxi original: grilla 5x5, landmarks y paredes originales, recompensas
+# -1/-10/+20, slip_prob=0.0 (determinista). Kwargs disponibles: num_rows, num_cols,
+# locs, internal_walls, step_reward, pickup_reward, invalid_reward, dropoff_reward,
+# slip_prob, horizon. Ver "Cómo correr un experimento" en el README para un ejemplo
+# completo (p.ej. env: {slip_prob: 0.1}).
+env: {}
+
+gamma: 0.99          # factor de descuento
+theta: 1.0e-8        # umbral de convergencia (Delta < theta) -- se reenvía a ValueIterationAgent
+max_iterations: 10000    # límite de sweeps -- se reenvía a ValueIterationAgent
+seed: 0              # semilla por defecto para los rollouts de `cli.py visualize` (VI es determinista dado P,R: no afecta a train/experiment)
+
+output:
+  runs_dir: runs     # base para create_run_dir(): resultados en runs/value_iteration/<timestamp>/

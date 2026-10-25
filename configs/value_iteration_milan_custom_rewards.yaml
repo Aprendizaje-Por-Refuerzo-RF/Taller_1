@@ -1,0 +1,19 @@
+# Experimento: mismo Milan Taxi (grilla, landmarks, determinista), pero con recompensas
+# distintas a las del ambiente original -- para ver cómo cambian V*, la política óptima y
+# la convergencia frente a `configs/value_iteration_milan.yaml`.
+
+algorithm: value_iteration
+
+env:
+  step_reward: -5         # antes -1: cada paso de movimiento cuesta más
+  pickup_reward: -1       # antes -1 (heredado de step_reward): PICKUP válido, sin cambio real
+  invalid_reward: -50     # antes -10: PICKUP/DROPOFF inválido castiga mucho más fuerte
+  dropoff_reward: 50      # antes +20: DROPOFF exitoso paga más
+
+gamma: 0.99
+theta: 1.0e-8
+max_iterations: 10000
+seed: 0
+
+output:
+  runs_dir: runs

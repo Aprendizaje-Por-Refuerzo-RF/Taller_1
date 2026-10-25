@@ -1,0 +1,22 @@
+# Configuración de Policy Iteration sobre Milan Taxi.
+# Ecuaciones de referencia: Sutton & Barto, Cap. 4 (Fig. 4.3).
+
+algorithm: policy_iteration
+
+# `make_env(**config["env"])` reenvía esto tal cual a `MilanTaxiEnv(...)` (ver su
+# docstring en src/rl_project/envs/milan_taxi.py). Vacío = usar todos los defaults del
+# Milan Taxi original: grilla 5x5, landmarks y paredes originales, recompensas
+# -1/-10/+20, slip_prob=0.0 (determinista). Kwargs disponibles: num_rows, num_cols,
+# locs, internal_walls, step_reward, pickup_reward, invalid_reward, dropoff_reward,
+# slip_prob, horizon. Ver "Cómo correr un experimento" en el README para un ejemplo
+# completo (p.ej. env: {slip_prob: 0.1}).
+env: {}
+
+gamma: 0.99          # factor de descuento
+theta: 1.0e-8        # umbral de convergencia para policy evaluation (ec. 4.5) -- se reenvía a PolicyIterationAgent
+max_eval_iterations: 10000    # límite de sweeps por evaluación completa -- se reenvía a PolicyIterationAgent
+max_policy_iterations: 1000   # límite de iteraciones evaluación+mejora -- se reenvía a PolicyIterationAgent
+seed: 0              # semilla por defecto para los rollouts de `cli.py visualize` (PI es determinista dado P,R: no afecta a train/experiment)
+
+output:
+  runs_dir: runs     # base para create_run_dir(): resultados en runs/policy_iteration/<timestamp>/

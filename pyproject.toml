@@ -1,0 +1,24 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "rl_project"
+version = "0.1.0"
+description = "Taller 1 - Dynamic Programming (Policy Iteration / Value Iteration) sobre el ambiente Milan Taxi"
+requires-python = ">=3.12,<3.14"
+
+dependencies = [
+    "gymnasium[toy-text]==1.2.3",
+    "ipython",
+    "ipykernel==7.2.0",
+    "jupyter",
+    "matplotlib==3.10.9",
+    "numpy==2.4.6",
+    "pygame",
+    "PyYAML",
+    "tqdm==4.67.3",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/rl_project"]
